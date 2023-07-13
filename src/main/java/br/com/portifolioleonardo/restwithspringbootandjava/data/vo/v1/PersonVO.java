@@ -1,27 +1,19 @@
-package br.com.portifolioleonardo.restwithspringbootandjava.model;
+package br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v1;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-
-@Entity
-@Table(name="Person")
-public class Person implements Serializable {
+public class PersonVO implements Serializable {
     private static final long serializedVersionUID = 1L;
 
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="first_name", nullable = false, length = 80)
     private String firstName;
-    @Column(name="last_name", nullable = false, length = 80)
 
     private String lastName;
-    @Column(nullable = false, length = 100)
     private String address;
-    @Column(nullable = false, length = 6)
     private String gender;
 
-    public Person() {
+    public PersonVO() {
     }
 
     public Long getId() {
@@ -36,8 +28,8 @@ public class Person implements Serializable {
         return firstName;
     }
 
-    public void setFirstName(String firsName) {
-        this.firstName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -68,7 +60,7 @@ public class Person implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person Person = (Person) o;
+        PersonVO Person = (PersonVO) o;
         return Objects.equals(id, Person.id) && Objects.equals(firstName, Person.firstName) && Objects.equals(lastName, Person.lastName) && Objects.equals(address, Person.address) && Objects.equals(gender, Person.gender);
     }
 
