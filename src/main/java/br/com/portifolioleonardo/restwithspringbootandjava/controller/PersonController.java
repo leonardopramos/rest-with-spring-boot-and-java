@@ -1,7 +1,7 @@
 package br.com.portifolioleonardo.restwithspringbootandjava.controller;
 
 import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v1.PersonVO;
-import br.com.portifolioleonardo.restwithspringbootandjava.model.Person;
+import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v2.PersonVOV2;
 import br.com.portifolioleonardo.restwithspringbootandjava.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,6 +28,10 @@ public class PersonController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public PersonVO create(@RequestBody PersonVO personVO) throws Exception{
         return PersonServices.createPerson(personVO);
+    }
+    @PostMapping(value="/v2", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) throws Exception{
+        return PersonServices.createPersonV2(personVOV2);
     }
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

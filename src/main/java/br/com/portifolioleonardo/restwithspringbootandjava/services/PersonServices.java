@@ -1,7 +1,9 @@
 package br.com.portifolioleonardo.restwithspringbootandjava.services;
 
 import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v1.PersonVO;
+import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v2.PersonVOV2;
 import br.com.portifolioleonardo.restwithspringbootandjava.exceptions.ResourceNotFoundException;
+import br.com.portifolioleonardo.restwithspringbootandjava.mapper.Custom.PersonMapper;
 import br.com.portifolioleonardo.restwithspringbootandjava.mapper.DozerMapper;
 import br.com.portifolioleonardo.restwithspringbootandjava.model.Person;
 import br.com.portifolioleonardo.restwithspringbootandjava.repositories.PersonRepository;
@@ -17,6 +19,8 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    PersonMapper mapper;
 
     public List<PersonVO> findAll(){
         return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class) ;
@@ -46,5 +50,11 @@ public class PersonServices {
         logger.info("Finding one Person!");
         var entity =  repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this Id."));
         return DozerMapper.parseObject(entity, PersonVO.class);
+    }
+
+    public PersonVOV2 createPersonV2(PersonVOV2 person) {
+        logger.info("Creating one Person(v2)");
+        var entity = mapper.convertVoTOEntity(person);
+        return mapper.convertEntityToVo(repository.save(entity));
     }
 }
