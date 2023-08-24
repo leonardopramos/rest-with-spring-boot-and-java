@@ -11,7 +11,7 @@ public class PersonMapper {
 
     public PersonVOV2 convertEntityToVo(Person person) {
         PersonVOV2 vo = new PersonVOV2();
-        vo.setId(person.getId());
+        vo.setId(person.getKey());
         vo.setAddress(person.getAddress());
         vo.setBirthDay(new Date());
         vo.setFirstName(person.getFirstName());

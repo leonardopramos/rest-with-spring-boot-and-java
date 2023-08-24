@@ -1,15 +1,17 @@
 package br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v2;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@JsonPropertyOrder({"id", "address","firstName", "lastName",  "gender"})
 public class PersonVOV2 implements Serializable {
     private static final long serializedVersionUID = 1L;
 
     private Long id;
     private String firstName;
-
     private String lastName;
     private String address;
     private String gender;
