@@ -3,6 +3,7 @@ package br.com.portifolioleonardo.restwithspringbootandjava.services;
 import br.com.portifolioleonardo.restwithspringbootandjava.controller.PersonController;
 import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v1.PersonVO;
 import br.com.portifolioleonardo.restwithspringbootandjava.data.vo.v2.PersonVOV2;
+import br.com.portifolioleonardo.restwithspringbootandjava.exceptions.RequiredObjectIsNullException;
 import br.com.portifolioleonardo.restwithspringbootandjava.exceptions.ResourceNotFoundException;
 import br.com.portifolioleonardo.restwithspringbootandjava.mapper.Custom.PersonMapper;
 import br.com.portifolioleonardo.restwithspringbootandjava.mapper.DozerMapper;
@@ -41,6 +42,8 @@ public class PersonServices {
     }
 
     public PersonVO createPerson(PersonVO person) throws Exception {
+
+        if(person == null) throw new RequiredObjectIsNullException();
         logger.info("Creating one Person");
         var entity = DozerMapper.parseObject(person, Person.class);
         var vo =  DozerMapper.parseObject(repository.save(entity), PersonVO.class);
@@ -48,6 +51,8 @@ public class PersonServices {
         return vo;
     }
     public PersonVO updatePerson(PersonVO person) throws Exception {
+        if(person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Updating one Person");
 
         var entity = repository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("No records found for this Id."));
